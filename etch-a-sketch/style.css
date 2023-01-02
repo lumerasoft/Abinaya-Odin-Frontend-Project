@@ -1,0 +1,28 @@
+body{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.header{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-direction: row;
+    width:500px;
+    margin-bottom: 20px;
+}
+.footer{
+    display:flex;
+    justify-content:space-around;
+    align-items: center;
+    flex-direction: row;
+    width:500px;
+    margin-top: 20px;
+}
+.sketch-board{
+    width: 500px;
+    height: 500px;
+    display: grid;
+    border:1px solid black;
+}
