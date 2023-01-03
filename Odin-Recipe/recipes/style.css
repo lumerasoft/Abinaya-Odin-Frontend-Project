@@ -1,0 +1,27 @@
+.recipeImg
+{
+    width:1200px;
+    height:400px;
+    padding-left:25px;
+}
+.recipeTitle
+{
+    font-size: 44;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: center;
+    color:#2e1b01;
+    background-color:burlywood;
+    border: 3.5px solid #2e1b01;
+}
+.recipeBox
+{
+    border: 1.5px solid #2e1b01;
+    padding: 15px;
+    margin-left: 25px;
+    margin-right: 25px;
+    background-color: burlywood;
+}
+body
+{
+    background-color: #2e1b01;
+}
