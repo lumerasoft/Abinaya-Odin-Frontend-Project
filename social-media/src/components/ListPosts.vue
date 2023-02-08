@@ -5,11 +5,10 @@
 
 <button id="post-button" @click="$router.push('/create-post')">Add post</button>
 
-<p>{{getPost()}}</p>
+<!--<p>{{getPost()}}</p>-->
 <div v-for="(post,index) in posts" :key="index">
 <PostDetails :title="post.title" :content="post.content" :tag="post.tag"/>
 </div>
-
 
 </template>
 
@@ -23,18 +22,17 @@ export default {
     name: "SocialMediaPost",
     data() {
         return {
-                title: '',
-                content: '',
-                tag: '',
                 posts:[]
         }
     },
     methods: {
-        getPost: function() {
+        getPost() {
             this.posts=JSON.parse(localStorage.getItem(STORAGE_KEY))
-            return this.post;
        }
-    }
+    },
+    mounted(){
+        this.getPost();
+    } 
 }
 </script>
 <style>

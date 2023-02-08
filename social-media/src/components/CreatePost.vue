@@ -1,20 +1,32 @@
 <template>
-<h1>User Post Creation</h1>
-<form>
-    <label>Title : </label>
-    <input type="text" id="title" placeholder="Enter the title" v-model="title">
-    <br />
-    <br />
-    <label>Content : </label>
-    <input type="text" id="content" placeholder="Enter the content" v-model="content">
-    <br />
-    <br />
-    <label>Tag : </label>
-    <input type="text" id="tag" placeholder="Tag someone" v-model="tag">
-    <br />
+<div id="heading">
+<h1>Social Media Posts</h1>
+</div> 
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+  <form>
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" id="title" placeholder="post title" v-model="title">
+    </div>
+    <div class="form-group">
+     <label>Content</label>
+        <textarea class="form-control" id="content" rows="3" placeholder="Enter the content of post" v-model="content"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Tag</label>
+        <input type="text" class="form-control" id="tag" placeholder="tag someone" v-model="tag">
+    </div>
+        <br />
     <br />
     <button v-on:click="post" type="button">Post</button>
-</form>
+
+    </form>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
 
 </template>
 
@@ -41,4 +53,16 @@ export default {
         }
     }
 }
+// get Item and assign to a variable =>  String '[{}]'
+// JSON parse it to [{}]
+// push new item into the array
+// Stringify updated array, '[{a: 1}]'
+// write the updated array to localStorage
 </script>
+
+<style>
+#heading{
+  text-align: center;
+  color:navy;
+}
+</style>
