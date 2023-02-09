@@ -21,15 +21,11 @@
         <br />
     <br />
     <button v-on:click="post" type="button">Post</button>
-
     </form>
   </div>
   <div class="col-sm-2"></div>
 </div>
-
-
 </template>
-
 <script>
 const STORAGE_KEY='media-post';
 export default {
@@ -50,21 +46,14 @@ export default {
             this.title=''
             this.content=''
             this.tag=''
-
+            this.$router.push('/')
         }
     }
 }
-// get Item and assign to a variable =>  String '[{}]'
-// JSON parse it to [{}]
-// push new item into the array
-// Stringify updated array, '[{a: 1}]'
-// write the updated array to localStorage
 </script>
-
 <style>
 #heading{
   text-align: center;
   color:navy;
 }
-
 </style>

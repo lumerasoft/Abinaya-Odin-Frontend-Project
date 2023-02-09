@@ -7,8 +7,7 @@
         <h2 class="card-title">{{title}}</h2>
         <p class="card-text">{{content}}</p>
         <b class="card-text">Tag: @{{tag}}</b>
-        <!--<a id="comment-link" href="/id">Comments</a>-->
-        <router-link id="comment-link" :to="`/${id}`">Comments</router-link>
+        <a id="comment-link" href="">Comments</a>
 
       </div>
     </div>
@@ -17,14 +16,12 @@
 </div>
 <br/>
   </template>
-
 <script>
 export default{
     props: {
         title: String,
         content: String,
-        tag: String,
-        id: String
+        tag: String
     }
 }
 </script>

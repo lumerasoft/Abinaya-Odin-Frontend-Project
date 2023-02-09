@@ -2,16 +2,12 @@
 <div id="heading">
 <h1>Social Media Posts</h1>
 </div> 
-
 <button id="post-button" @click="$router.push('/create-post')">Add post</button>
-
-<!--<p>{{getPost()}}</p>-->
 <div v-for="(post,index) in posts" :key="index">
-<PostDetails :title="post.title" :content="post.content" :tag="post.tag" :id="post.id"/>
+<PostDetails :title="post.title" :content="post.content" :tag="post.tag"/>
 </div>
 
 </template>
-
 <script>
 import PostDetails from './PostDetails.vue'
 const STORAGE_KEY='media-post';
@@ -43,5 +39,4 @@ export default {
   text-align: center;
   color:navy;
 }
-
 </style>

@@ -1,6 +1,5 @@
 import ListPosts from './components/ListPosts.vue'
 import CreatePost from './components/CreatePost.vue'
-import PostComment from './components/PostComment.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
     {
@@ -12,15 +11,6 @@ const routes = [
         name: 'CreatePost',
         component: CreatePost,
         path: '/create-post'
-    },
-    {
-        name:'PostComment',
-        component: PostComment,
-        path: '/post-comment'
-    },
-    {
-        path: '/:id',
-        component: PostComment
     }
 ];
 
