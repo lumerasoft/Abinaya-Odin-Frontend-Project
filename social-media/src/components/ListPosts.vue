@@ -7,7 +7,7 @@
 
 <!--<p>{{getPost()}}</p>-->
 <div v-for="(post,index) in posts" :key="index">
-<PostDetails :title="post.title" :content="post.content" :tag="post.tag"/>
+<PostDetails :title="post.title" :content="post.content" :tag="post.tag" :id="post.id"/>
 </div>
 
 </template>

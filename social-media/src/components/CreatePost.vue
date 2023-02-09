@@ -44,6 +44,7 @@ export default {
     },
     methods: {
         post() {
+            this.posts=JSON.parse(localStorage.getItem(STORAGE_KEY))
             this.posts.push({title: this.title,content: this.content, tag: this.tag, id: this.posts.length });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.posts));
             this.title=''
@@ -65,4 +66,5 @@ export default {
   text-align: center;
   color:navy;
 }
+
 </style>
