@@ -1,10 +1,10 @@
 <template>
 <div id="heading">
-<h1>Social Media Posts</h1>
+<h1>Create Post</h1>
 </div> 
 <div class="row">
   <div class="col-sm-2"></div>
-  <div class="col-sm-8">
+  <div class="col-sm-8" id="form-box">
   <form>
     <div class="form-group">
         <label>Title</label>
@@ -18,9 +18,11 @@
         <label>Tag</label>
         <input type="text" class="form-control" id="tag" placeholder="tag someone" v-model="tag">
     </div>
-        <br />
+    <br />
     <br />
     <button v-on:click="post" type="button">Post</button>
+     <br />
+    <br />
     </form>
   </div>
   <div class="col-sm-2"></div>
@@ -38,6 +40,7 @@ export default {
                 posts:[]
         }
     },
+    
     methods: {
         post() {
             this.posts=JSON.parse(localStorage.getItem(STORAGE_KEY))
@@ -46,7 +49,7 @@ export default {
             this.title=''
             this.content=''
             this.tag=''
-            this.$router.push('/')
+            this.$router.push('/post')
         }
     }
 }
@@ -55,5 +58,8 @@ export default {
 #heading{
   text-align: center;
   color:navy;
+}
+#form-box{
+    border: 10px solid navy;
 }
 </style>
