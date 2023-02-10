@@ -6,7 +6,7 @@ const routes = [
     {
         name: 'ListPosts',
         component: ListPosts,
-        path: '/'
+        path: '/post'
     },   
     {
         name: 'CreatePost',
@@ -16,7 +16,7 @@ const routes = [
     {
         name: 'PostComment',
         component: PostComment,
-        path: '/:id'
+        path: '/post/:id'
     }
 ];
 
