@@ -37,10 +37,13 @@
     <div class="row" id="comment-box">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <div class="card">
+            <div class="card" id="comment-box-list">
                 <h5 class="card-header">Comments ({{getCount}})</h5>
                 <div class="card-body">
-                    <p class="card-text" v-for="comment in getComment" :key="comment">{{comment}}</p>
+                    <div v-bind:key="post.id" v-for="post in post_comment">
+                        <h5>{{post.comment}}</h5>
+                    </div>
+
                 </div>
             </div>
 
@@ -58,14 +61,13 @@ export default {
             id: '',
             post: '',
             comment: '',
+            post_comment: [],
             comments: []
         }
     },
-    created() {
-        this.id = parseInt(this.$route.params.id)
-    },
     methods: {
         getPost() {
+            this.id = parseInt(this.$route.params.id)
             const posts = JSON.parse(localStorage.getItem('media-post'))
             this.post = posts.find(post => (post.id == this.id))
         },
@@ -73,23 +75,27 @@ export default {
             this.comments = JSON.parse(localStorage.getItem(STORAGE_KEY))
             this.comments.push({
                 comment: this.comment,
+                id: this.id
             });
             localStorage.setItem(STORAGE_KEY, JSON.stringify(this.comments));
-            this.title = ''
             this.comment = ''
+            this.id = ''
         },
+        getComment() {
+            this.id = parseInt(this.$route.params.id)
+            const comments = JSON.parse(localStorage.getItem(STORAGE_KEY))
+            this.post_comment = comments.filter(post_comment => (post_comment.id == this.id))
+        }
     },
     mounted() {
         this.getPost();
+        this.getComment();
     },
     computed: {
         getCount() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)).length
-        },
-        getComment() {
-            return JSON.parse(localStorage.getItem(STORAGE_KEY)).map((post) => {
-                return post.comment
-            })
+            const comment_count = JSON.parse(localStorage.getItem(STORAGE_KEY))
+            let count = comment_count.filter(post_comment => (post_comment.id == this.id)).length
+            return count
         }
     }
 }
@@ -109,5 +115,9 @@ export default {
 
 #comment-box {
     margin-top: 25px;
+}
+
+#comment-box-list {
+    border: 5px solid navy;
 }
 </style>
