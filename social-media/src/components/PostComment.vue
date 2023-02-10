@@ -20,6 +20,10 @@
         <div class="col-sm-2"></div>   
     </div>
 </div>
+<p>{{getPost()}}</p>
+    <p>{{post.title}}</p>
+    <p>{{post.content}}</p>
+    <p>{{post.tag}}</p>
 <br/>
 <br/>
 <p>Comments: {{getCount}}</p>
@@ -34,12 +38,20 @@ const STORAGE_KEY = 'comment';
 export default {
     data() {
         return {
-            title: '',
+            id:'',
+            post: '',
             comment: '',
             comments: []
         }
     },
+     created() {
+        this.id=parseInt(this.$route.params.id)
+     },
     methods: {
+        getPost(){
+        const posts=JSON.parse(localStorage.getItem('media-post'))
+        this.post = posts.find(post=>(post.id==this.id))
+        },
         postComment() {
             this.comments = JSON.parse(localStorage.getItem(STORAGE_KEY))
             this.comments.push({
@@ -57,7 +69,7 @@ export default {
             },
             getComment() {
             return JSON.parse(localStorage.getItem(STORAGE_KEY)).map((post)=>{
-                    return post.title+" "+post.comment
+                    return post.comment
             })
         }
     }
