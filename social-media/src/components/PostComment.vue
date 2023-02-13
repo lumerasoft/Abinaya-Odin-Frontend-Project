@@ -20,14 +20,14 @@
         <div class="col-sm-6">
             <form>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="comment" placeholder="comment here" v-model="comment">
+                    <input type="text" class="form-control" id="comment" placeholder="comment here" v-model="postComment.comment">
                 </div>
                 <br />
                 <br />
             </form>
         </div>
         <div class="col-sm-2">
-            <button v-on:click="postComment" type="button">comment</button>
+            <button v-on:click="postingComment" type="button">comment</button>
         </div>
         <div class="col-sm-2"></div>
     </div>
@@ -38,9 +38,9 @@
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
             <div class="card" id="comment-box-list">
-                <h5 class="card-header">Comments ({{getCount}})</h5>
+                <h5 class="card-header">Comments ({{commentCount}})</h5>
                 <div class="card-body">
-                    <div v-bind:key="post.id" v-for="post in post_comment">
+                    <div v-bind:key="post.id" v-for="post in currentComment">
                         <h5>{{post.comment}}</h5>
                     </div>
 
@@ -58,11 +58,14 @@ const STORAGE_KEY = 'comment';
 export default {
     data() {
         return {
-            id: '',
             post: '',
-            comment: '',
-            post_comment: [],
-            comments: []
+            postComment: {
+                id: this.$route.params.id,
+                comment: ''
+            },
+            currentComment: (JSON.parse(localStorage.getItem(STORAGE_KEY))).filter(post_comment => (post_comment.id == this.$route.params.id)),
+            otherComment: (JSON.parse(localStorage.getItem(STORAGE_KEY))).filter(post_comment => (post_comment.id != this.$route.params.id)),
+
         }
     },
     methods: {
@@ -71,31 +74,22 @@ export default {
             const posts = JSON.parse(localStorage.getItem('media-post'))
             this.post = posts.find(post => (post.id == this.id))
         },
-        postComment() {
-            this.comments = JSON.parse(localStorage.getItem(STORAGE_KEY))
-            this.comments.push({
-                comment: this.comment,
-                id: this.id
-            });
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(this.comments));
-            this.comment = ''
-            this.id = ''
-        },
-        getComment() {
-            this.id = parseInt(this.$route.params.id)
-            const comments = JSON.parse(localStorage.getItem(STORAGE_KEY))
-            this.post_comment = comments.filter(post_comment => (post_comment.id == this.id))
+        postingComment() {
+            this.currentComment.push(this.postComment);
+            const result = this.currentComment.concat(this.otherComment);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(result));
+            this.postComment = {
+                id: parseInt(this.$route.params.id),
+                comment: ''
+            }
         }
     },
     mounted() {
         this.getPost();
-        this.getComment();
     },
     computed: {
-        getCount() {
-            const comment_count = JSON.parse(localStorage.getItem(STORAGE_KEY))
-            let count = comment_count.filter(post_comment => (post_comment.id == this.id)).length
-            return count
+        commentCount() {
+            return this.currentComment.length
         }
     }
 }
